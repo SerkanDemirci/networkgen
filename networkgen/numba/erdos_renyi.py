@@ -3,7 +3,7 @@ from numba import njit
 import random
 
 @njit
-def numba_erdos_renyi(num_nodes : int, edge_prob : float) -> List[Tuple[int, int]]:
+def erdos_renyi(num_nodes : int, edge_prob : float) -> List[Tuple[int, int]]:
     edges = []
     
     i : int = 0
@@ -20,5 +20,5 @@ def numba_erdos_renyi(num_nodes : int, edge_prob : float) -> List[Tuple[int, int
     
     return edges
 
-def numba_warmup_erdos_renyi():
-    numba_erdos_renyi(5, 0.8) # Warmup
+def warmup_erdos_renyi():
+    erdos_renyi(5, 0.8) # Warmup

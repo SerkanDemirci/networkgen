@@ -3,7 +3,7 @@ from numba import njit
 import random
 
 @njit
-def numba_barabasi_albert(num_nodes : int, initial_num_nodes : int) -> List[Tuple[int, int]]:
+def barabasi_albert(num_nodes : int, initial_num_nodes : int) -> List[Tuple[int, int]]:
     degrees = []
     edges = []
     
@@ -40,5 +40,5 @@ def numba_barabasi_albert(num_nodes : int, initial_num_nodes : int) -> List[Tupl
     return edges 
 
 
-def numba_warmup_barabasi_albert():
-    numba_barabasi_albert(20, 5)
+def warmup_barabasi_albert():
+    barabasi_albert(20, 5)
