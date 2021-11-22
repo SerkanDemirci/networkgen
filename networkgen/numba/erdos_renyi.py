@@ -20,4 +20,5 @@ def numba_erdos_renyi(num_nodes : int, edge_prob : float) -> List[Tuple[int, int
     
     return edges
 
-numba_erdos_renyi(5, 0.8) # Warmup
+def numba_warmup_erdos_renyi():
+    numba_erdos_renyi(5, 0.8) # Warmup
