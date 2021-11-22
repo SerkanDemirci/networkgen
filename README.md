@@ -37,6 +37,9 @@ $ networkgen barabasi_albert <num_nodes> <num_neighbors> <rewire_probability>
 $ networkgen ring_lattice <num_nodes> <num_neighbors>
 ```
 
+<img src="examples/ring_lattice.png?raw=true" width="256"/>
+
+
 ## TODO: Models
 - [x] Erdős–Rényi
 - [x] Barabási–Albert
