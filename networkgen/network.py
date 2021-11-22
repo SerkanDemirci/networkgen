@@ -1,6 +1,6 @@
 
 
-from typing import List
+from typing import List, Tuple
 import numpy as np
 import pandas as pd
 
@@ -58,7 +58,7 @@ class AdjacencyList(BaseNetwork):
             self.add_edge(s, t)
             
         
-    def add_edge(self, s, t):
+    def add_edge(self, s : int, t : int) -> None:
         if t not in self.nodes[s]:
             self.nodes[s].add(t)
             self._num_edges += 1
@@ -66,15 +66,22 @@ class AdjacencyList(BaseNetwork):
             if not self._is_directed:
                 self.nodes[t].add(s)
             
-    def add_node(self):
+    def add_node(self) -> int:
         node_id = self._num_nodes
         self.nodes.append(set())
         self._num_nodes += 1
         
         return node_id
-        
     
-    def to_dataframe(self):
+    def get_degrees(self) -> np.ndarray:
+        degrees = np.zeros(self._num_nodes, dtype=int)
+        
+        for i, n in enumerate(self.nodes):
+            degrees[i] = len(n)
+        
+        return degrees
+    
+    def to_edge_list(self) -> np.ndarray:
         edges = np.zeros((self._num_edges, 2), dtype=int)
         
         index = 0
@@ -86,8 +93,19 @@ class AdjacencyList(BaseNetwork):
                 edges[index, 0] = s
                 edges[index, 1] = t
                 index += 1
-               
-        df = pd.DataFrame(edges, columns=["Source", "Target"])
-        df["Type"] = "Undirected" 
-        return df
         
+        return edges
+    
+    def __str__(self) -> str:
+        nodes, edges = self.to_dataframe()
+        return f"Nodes:\n{nodes}\nEdges:\n{edges}"
+        
+    
+    def to_dataframe(self) -> Tuple[pd.DataFrame, pd.DataFrame]:
+        edges = pd.DataFrame(self.to_edge_list(), columns=["Source", "Target"])
+        edges["Type"] = "Undirected" 
+    
+        nodes = pd.DataFrame(range(self._num_nodes), columns=["id"])
+        nodes["Degree"] = self.get_degrees()
+        
+        return nodes, edges
