@@ -1,0 +1,7 @@
+__title__ = 'networkgen'
+__description__ = 'A python module to create random networks using network models'
+__version__ = '0.1.0'
+__author__ = 'Serkan Demirci'
+__author_email__ = ''
+__license__ = 'MIT License'
+__url__ = 'https://github.com/SerkanDemirci/networkgen'
